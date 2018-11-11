@@ -1,0 +1,51 @@
+.content-grid {
+	background-color: rgba(27,40,56,0.59);
+	width: 101.5%;
+	min-height: 500px;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 250px;
+	margin-left: -15px;
+	padding: 30px;
+	color: white;
+}
+.pay-type {
+	color: rgba(217,217,217,1.00);
+	margin: 10px;
+	margin-left: 0px;
+}
+.pay-type:hover {
+	color: white;
+	text-decoration: none!important;
+}
+.game-calc {
+	color: rgba(217,217,217,1.00);
+	position: relative;
+	top: -10px;
+}
+.game-calc:hover {
+	color: white;
+	text-decoration: none!important;
+}
+.game-calc-p {
+	margin-bottom: 0px;
+}
+.price-form {
+	color: green!important;
+}
+.game-count {
+	width: 100%;
+	background-color: rgba(27,40,56);
+	padding: 15px;
+}
+.utill-border {
+	border-bottom: 1px solid rgba(107,107,107,1.00);
+	line-height: 30px!important;
+	color: rgba(155,155,155,1.00);
+}
+.game-count>p {
+	line-height: 15px;
+}
+.cb {
+	color: black!important;
+}

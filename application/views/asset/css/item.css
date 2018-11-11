@@ -1,21 +1,14 @@
-.searching-bar {
-	margin-top: 60px;
-}
-.item-grid {
+.content-grid {
 	width: 101.5%;
-	height: 800px;
+	min-height: 800px;
 	background-color: rgba(27,40,56,0.59);
 	position: relative;
 	margin-left: -15px;
+	margin-bottom: 260px;
 	padding: 30px;
 	color: white;
 }
-.container {
-	margin-bottom: 100px;
-}
-.ex {
-	
-}
+.ex {}
 .item-info {
 	background-color: rgba(27,40,56);
 	width: 100%;
@@ -62,3 +55,4 @@
 	position: relative;
 	top: -2px;
 }
+/* searching bar */
