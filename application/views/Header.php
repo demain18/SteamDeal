@@ -3,7 +3,7 @@
 <head>
 	<!-- root 위치는 phpmysql폴더 부터이다 -->
 	<link rel="stylesheet" href="/SteamDeal/public/css/header.css?ver=1">
-	<link rel="stylesheet" href="/SteamDeal/public/css/<?php echo $style_sheet_index ?>?ver=2">
+	<link rel="stylesheet" href="/SteamDeal/public/css/<?php echo $style_sheet_index ?>?ver=3">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 	<!-- <script src="./asset/js/autofill.js"></script> -->
 
@@ -26,7 +26,7 @@
 
 	<div class="navbar-sd">
 		<span class="navbar-logo navbar-left"><a href="/SteamDeal/main/index"><img src="/SteamDeal/public/img/logo-img.png" class="logo-img"></a></span>
-		<span class="navbar-ex navbar-right"><a href="">계정 판매하기</a></span>
+		<span class="navbar-ex navbar-right"><a href="/SteamDeal/main/sell">계정 판매하기</a></span>
 		<span class="navbar-login navbar-right"><a data-toggle="modal" href="#loginModal">로그인</a></span>
 		<span class="navbar-register navbar-right"><a data-toggle="modal" href="#registerModal">회원가입</a></span>
 

@@ -10,7 +10,7 @@
 			  <div class="modal-body">
 				<form id="steam_profile" action="/SteamDeal/main/scraping">
 				  <div class="form-group">
-					<label for="exampleInputPassword1">스팀 프로필 사이트 링크를 입력하세요.</label>
+					<label for="exampleInputPassword1">스팀 프로필 오른쪽 배너의 '게임' 링크를 붙혀넣으세요.</label>
 					<input type="text" class="form-control" name="steam_profilesite_link" id="steam_profilesite_link" placeholder="Link here.">
 				  </div>
 				  <button type="button" class="btn btn-primary" value="POST" onclick="game_scraping();">조회하기</button>

@@ -46,6 +46,11 @@
 .game-count>p {
 	line-height: 15px;
 }
+.play-time {
+	position: absolute;
+	right: 30px;
+	color: rgb(175, 175, 175);
+}
 .cb {
 	color: black!important;
 }

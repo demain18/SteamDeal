@@ -20,7 +20,7 @@
 				<div class="alert alert-success" role="alert">
 					계정 추정가격 : 정해지지 않음.
 				</div>
-				<p class="game-calc-p"><a class="game-calc" data-toggle="modal" href="#steamGameList">내 게임목록 조회하기</a></p>
+				<p class="game-calc-p" id="game_check"><a class="game-calc" data-toggle="modal" href="#steamGameList">내 게임목록 조회하기</a></p>
 
 
 
@@ -72,82 +72,72 @@
 				<p>Call of duty Modern Warfare</p>
 				<p>Day by daylight</p>
 				-->
+				<div class="game_list" id="steam_game_list">
+					<p>아직 게임목록이 조회되지 않았습니다.</p>
+				</div>
 				<script type="text/javascript">
 					function game_scraping() {
-						/*
-						var queryString = $("form[name=steam_profilesite]").serialize();
-							$.ajax({
-									type: 'post',
-									url: '/SteamDeal/main/scraping',
-									data: queryString,
-									dataType:'text',
-									success: function () {
-											alert('data posted successfully!');
-											console.log(queryString);
-									},
-									error: function (request, status, error) {
-											alert('data posted failed.');
-											console.log('code: '+request.status+"\n"+'message: '+request.responseText+"\n"+'error: '+error);
-									}
-							});
-							*/
-							// var queryString = $("#steam_profilesite_link").serialize();
-							var queryString = $("#steam_profilesite_link").serialize();
-							alert(queryString);
-							/*
-							$.ajax({
-										url: '/SteamDeal/main/scraping',
-										type : "POST",
-					 					cache : false,
-					 					data : queryString,
-										dataType : "json",
-										success: function () {
-												alert('data posted successfully!');
-												console.log(queryString);
-										},
-										error: function (request, status, error) {
-												alert('data posted failed.');
-												console.log('code: '+request.status+"\n"+'message: '+request.responseText+"\n"+'error: '+error);
-										}
-									});
-									*/
 
-									/*
+							var queryString = $("#steam_profile").serialize();
+							// alert(queryString);
 									$.ajax({
-										type: 'POST',
 										url : '/SteamDeal/main/scraping',
-										data: {
-											param1	: queryString
+										data			: {
+											param1		: queryString
 										},
-										dataType:"text",
-										success : function(data, status, xhr)
-										{
-											alert('ajax worked.');
-											console.log(queryString);
-										},
-										error: function (request, status, error)
-										{
-												alert('ajax failed.');
-												console.log('code: '+request.status+"\n"+'message: '+request.responseText+"\n"+'error: '+error);
+										type			: 'POST',
+										dataType		: 'json',
+										success: function(result) {
+											if(result.success == false) {
+												console.log('failed.');
 										}
+											// var result = urldecode(result.data);
+											// console.log(result.data);
+											/*
+											var game_list = result.data;
+						          for(var i = 0; i < game_list.length; i++) {
+						            console.log(game_list[i].appid);
+						            console.log(game_list[i].name);
+						            console.log(game_list[i].hours_forever);
+						            document.write("<h3>"+game_list[i].name+"</h3>");
+						          }
+											*/
+											var game_list = JSON.parse(result.data);
+											// json문자열을 javascript 오브젝트로 반환
+											$('#steamGameListModalClose').trigger('click');
+											console.log(game_list);
+											$("#steam_game_list *").remove();
+											$("#game_check").remove();
+											game_list.forEach(function(row){
+													console.log(row.name);
+													function playtime() {
+														if (row.hours_forever == undefined) {
+															return '0h';
+														} else {
+															return row.hours_forever+'h';
+														}
+													}
+
+								          var tmpHtml = '<p>'+row.name+'<span class="play-time">'+playtime()+'</span>'+'</p>';
+								          $("#steam_game_list").append(tmpHtml);
+											});
+											/*
+											var game_list = result.data;
+						          for(var i = 0; i < 5game_list.lengt; i++) {
+						            console.log(result.appid);
+						            console.log(result.name);
+						            console.log(result.hours_forever);
+						            document.write("<h3>"+game_list[i].name+"</h3>");
+						          }
+											*/
+										},
+
+										error: function(request, status, error) {
+								        console.log(request.responseText);
+								    }
+
 									});
-									*/
-										$.ajax({
-											url : '/SteamDeal/main/ajax_get',
-											data			: {
-												param1		: '10',
-												param2		: '20',
-												param3		: queryString
-											},
-											type			: 'POST',
-											dataType		: 'json',
-											success		: function(result) {
-												if(result.success == false) {
-													alert('failed.');
-												}
-												alert(result.data);
-											}
-										});
+
 					}
 				</script>
 			</div>
