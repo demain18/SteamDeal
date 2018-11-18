@@ -12,13 +12,16 @@
 						<option>블리자드 배틀넷(Blizzard Battle.net)</option>
 					</select>
 				</div>
-				<div class="form-group">
-				<label for="exampleInputEmail1">계정 정보 추가하기</label>
-				<input type="text" class="form-control account-info" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이곳에 작성하세요.">
-				<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+				<div class="input-group account-explain-group">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text">계정설명</span>
+				  </div>
+				  <textarea class="form-control account-explain" aria-label="With textarea"></textarea>
 				</div>
-				<div class="alert alert-success" role="alert">
-					계정 추정가격 : 정해지지 않음.
+				<div class="alert alert-success" id="account_price_expect" role="alert">
+					<div id="account_price_expect">
+						계정 추정가격 : 정해지지 않음.
+					</div>
 				</div>
 				<p class="game-calc-p" id="game_check"><a class="game-calc" data-toggle="modal" href="#steamGameList">내 게임목록 조회하기</a></p>
 
@@ -78,10 +81,15 @@
 				<script type="text/javascript">
 					function game_scraping() {
 
+						function addComma(num) {
+						  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+						  return num.toString().replace(regexp, ',');
+						}
+
 							var queryString = $("#steam_profile").serialize();
 							// alert(queryString);
 									$.ajax({
-										url : '/SteamDeal/main/scraping',
+										url : '/SteamDeal/process/scraping',
 										data			: {
 											param1		: queryString
 										},
@@ -102,12 +110,16 @@
 						            document.write("<h3>"+game_list[i].name+"</h3>");
 						          }
 											*/
+
 											var game_list = JSON.parse(result.data);
+											var game_count = Object.keys(game_list).length;
 											// json문자열을 javascript 오브젝트로 반환
 											$('#steamGameListModalClose').trigger('click');
 											console.log(game_list);
 											$("#steam_game_list *").remove();
-											$("#game_check").remove();
+											$("#account_price_expect *").remove();
+											// $("#game_check").remove();
+
 											game_list.forEach(function(row){
 													console.log(row.name);
 													function playtime() {
@@ -117,10 +129,10 @@
 															return row.hours_forever+'h';
 														}
 													}
-
 								          var tmpHtml = '<p>'+row.name+'<span class="play-time">'+playtime()+'</span>'+'</p>';
 								          $("#steam_game_list").append(tmpHtml);
 											});
+											$("#account_price_expect").append('계정 추정가격 : '+addComma(game_count*2000)+'₩ ~ '+addComma(game_count*2500)+'₩');
 											/*
 											var game_list = result.data;
 						          for(var i = 0; i < 5game_list.lengt; i++) {

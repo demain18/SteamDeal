@@ -54,3 +54,9 @@
 .cb {
 	color: black!important;
 }
+.account-explain-group {
+	margin-bottom: 15px;
+}
+.account-explain {
+	height: 100px!important;
+}
