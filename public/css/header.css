@@ -57,10 +57,18 @@ body {
 	position: absolute;
 	right: 175px;
 }
+.navbar-logout {
+	position: absolute;
+	right: 95px;
+}
+.navbar-sell {
+	position: absolute;
+	right: 175px;
+}
 .navbar-ex {
 	position: absolute;
 	top: 11px;
-	right: 275px;
+	right: 175px;
 }
 .footer-description {
 	color: rgba(217,217,217,1.00);

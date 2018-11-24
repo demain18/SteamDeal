@@ -1,0 +1,11 @@
+.content-grid {
+  background-color: rgba(27,40,56,0.59);
+	width: 101.5%;
+	min-height: 500px;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	margin-left: -15px;
+	padding: 30px;
+	color: white;
+}
