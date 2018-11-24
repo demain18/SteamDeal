@@ -12,46 +12,31 @@
 				</button>
 			  </div>
 			  <div class="modal-body">
-				<script type="text/javascript">
-				/*
-				function form_check() {
-					var chk1=document.frmJoin.userinfo_statement.checked;
-					alert('checking...');
-					if(!chk1){
-							alert('약관1에 동의해 주세요');
-							return false;
-							break;
-					}
-					window.location.href = '/SteamDeal/process/register';
-				}
-				*/
-				</script>
-				<form action="/SteamDeal/process/register" method="post">
+				<form>
 				  <div class="form-group">
-					<label for="exampleInputEmail1">이메일</label>
-					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+					<label for="exampleInputEmail1">이메</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 					<small id="emailHelp" class="form-text text-muted">&nbsp;<a href="http://m.bunjang.co.kr/">번개장터</a>에서 사용하는 이메일과 동일해야합니다.</small>
 				  </div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">닉네임</label>
-					<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nickname">
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">아이디</label>
-					<input type="text" name="id" class="form-control" id="exampleInputPassword1" placeholder="Id">
+					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Id">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">비밀번호</label>
-					<input type="password" name="pw" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">비밀번호 재입력</label>
-					<input type="password" name="pwc" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 				  </div>
 				  <div class="form-group form-check">
-					<input type="hidden" name="statement_check" value="0" />
-					<input type="checkbox" name="statement_check" class="form-check-input" value="1" id="userinfo_statement">
-					<label class="form-check-label" for="exampleCheck1">서비스의 <a href="/SteamDeal/main/userinfo_statement" target="_blank">이용약관</a> 및 <a href="/SteamDeal/main/userinfo_statement" target="_blank">개인정보 취급방침</a>에 동의합니다.</label>
+					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label class="form-check-label" for="exampleCheck1">서비스의 <a href="#">이용약관</a> 및 <a href="#">개인정보 취급방침</a>에 동의합니다.</label>
 					  <!-- 클릭시 새창에서 이용약관과 개인정보 취급방침 실행 -->
 				  </div>
 				  <button type="submit" class="btn btn-primary">회원가입</button>
@@ -71,14 +56,14 @@
 				</button>
 			  </div>
 			  <div class="modal-body">
-				<form action="/SteamDeal/process/login" method="post">
+				<form>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">아이디</label>
-					<input type="text" name="id" class="form-control" id="exampleInputPassword1" placeholder="Id">
+					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Id">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">비밀번호</label>
-					<input type="password" name="pw" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 				  </div>
 				  <div class="form-group form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">

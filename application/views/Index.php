@@ -2,10 +2,8 @@
 <div class="container">
 <div class="searching-grid">
 	<h3 class="searching-title"><strong>하고싶은 게임을 저렴하게 가지세요.</strong></h3>
-	<form action="/SteamDeal/main/dashboard" class="searching-form">
-	<!-- <form action="/SteamDeal/main/dashboard" method="post" class="searching-form"> -->
+	<form action="#" class="searching-form">
 		<input class="form-controls form-control-lg searching-md" id="auto_tags" type="text" placeholder="이곳에서 게임을 검색하세요.">
-		<input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
 	</form>
 	<script type="text/javascript">
 	// require('application/controllers/module/jquery-ui-1.12.1.custom/jquery-ui.js');
