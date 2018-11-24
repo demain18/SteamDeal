@@ -139,7 +139,7 @@ if(isset($_SESSION["user_situation"]) == false) {
 											});
 
 											$("#account_price_expect").append('<span>계정 추정가격 : '+addComma(game_count*2000)+'₩ ~ '+addComma(game_count*2500)+'₩</span>');
-										  var game_list = encodeURI(php_array_main);
+										  var game_list = encodeURI(php_array_main); 
 
 											alert(game_list);
 											var value = $("#input_price").val();
