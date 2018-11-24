@@ -36,12 +36,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="result-item">
-				<span class="item-image"><img src="/SteamDeal/public/img/logo-steam.jpg" class="item-image-title"></span>
-				<span class="item-element item-price">25.5$</span>
-				<span class="item-element item-gamecount">Game count : 25</span>
-				<span class="item-element item-date">2018-11-10</span>
-			</div>
+			<a href="/SteamDeal/main/item">
+				<div class="result-item">
+					<span class="item-image"><img src="/SteamDeal/public/img/logo-steam.jpg" class="item-image-title"></span>
+					<span class="item-element item-price">25.5$</span>
+					<span class="item-element item-gamecount">Game count : 25</span>
+					<span class="item-element item-date">2018-11-10</span>
+				</div>
+			</a>
 			<div class="result-item">
 				<span class="item-image"><img src="/SteamDeal/public/img/logo-steam.jpg" class="item-image-title"></span>
 				<span class="item-element item-price">1000.0$</span>

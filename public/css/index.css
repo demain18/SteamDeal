@@ -1,7 +1,7 @@
 .searching-grid-background {
 	height: 580px;
 	width: 100%;
-	background-image: url("/SteamDeal/public/img/img02.png");
+	background-image: url("/SteamDeal/public/img/title-background.png");
   background-size: cover;
 	margin-bottom: -380px;
 }
