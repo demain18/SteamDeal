@@ -62,19 +62,60 @@ define('HDOM_INFO_ENDSPACE',7);
 define('DEFAULT_TARGET_CHARSET', 'UTF-8');
 define('DEFAULT_BR_TEXT', "\r\n");
 define('DEFAULT_SPAN_TEXT', " ");
-define('MAX_FILE_SIZE', 600000);
+if (!defined('MAX_FILE_SIZE')) {
+    define('MAX_FILE_SIZE', 600000);	
+}
+
 // helper functions
 // -----------------------------------------------------------------------------
 // get html dom from file
 // $maxlen is defined in the code as PHP_STREAM_COPY_ALL which is defined as -1.
-function file_get_html($url, $use_include_path = false, $context=null, $offset = -1, $maxLen=-1, $lowercase = true, $forceTagsClosed=true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT, $defaultSpanText=DEFAULT_SPAN_TEXT)
+function file_get_html($url, $use_include_path = false, $context=null, $maxLen=-1, $lowercase = true, $forceTagsClosed=true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT, $defaultSpanText=DEFAULT_SPAN_TEXT)
 {
     // We DO force the tags to be terminated.
     $dom = new simple_html_dom(null, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText, $defaultSpanText);
-    // For sourceforge users: uncomment the next line and comment the retreive_url_contents line 2 lines down if it is not already done.
-    $contents = file_get_contents($url, $use_include_path, $context);
-    // Paperg - use our own mechanism for getting the contents as we want to control the timeout.
-    //$contents = retrieve_url_contents($url);
+
+	do {
+		$repeat = false;
+		if ($context!==NULL)
+		{
+			// Test if "Accept-Encoding: gzip" has been set in $context
+			$params = stream_context_get_params($context);
+			if (isset($params['options']['http']['header']) && preg_match('/gzip/', $params['options']['http']['header']) !== false)
+			{
+				$contents = file_get_contents('compress.zlib://'.$url, $use_include_path, $context);
+			}
+			else
+			{
+				$contents = file_get_contents($url, $use_include_path, $context);
+			}
+		}
+		else
+		{
+		  	$contents = file_get_contents($url, $use_include_path, NULL);
+		}
+
+		// test if the URL doesn't return a 200 status
+		if (isset($http_response_header) && strpos($http_response_header[0], '200') === false) {
+			// has a 301 redirect header been sent?
+			$pattern = "/^Location:\s*(.*)$/i";
+			$location_headers = preg_grep($pattern, $http_response_header);
+
+			if (!empty($location_headers) && preg_match($pattern, array_values($location_headers)[0], $matches)) {
+				// set the URL to that returned via the redirect header and repeat this loop
+				$url = $matches[1];
+				$repeat = true;
+			}
+		}
+  	} while ($repeat);
+    
+	// stop processing if the header isn't a good responce
+  	if (isset($http_response_header) && strpos($http_response_header[0], '200') === false)
+	{
+  		return false;
+  	}	
+	
+	// stop processing if the contents are too big
     if (empty($contents) || strlen($contents) > MAX_FILE_SIZE)
     {
         return false;
@@ -680,7 +721,7 @@ class simple_html_dom_node
 // This implies that an html attribute specifier may start with an @ sign that is NOT captured by the expression.
 // farther study is required to determine of this should be documented or removed.
 //        $pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
-        $pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-:]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
+        $pattern = "/([\w\-:\*]*)(?:\#([\w\-]+)|\.([\w\-]+))?(?:\[@?(!?[\w\-:]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
         preg_match_all($pattern, trim($selector_string).' ', $matches, PREG_SET_ORDER);
         if (is_object($debugObject)) {$debugObject->debugLog(2, "Matches Array: ", $matches);}
 
@@ -886,7 +927,7 @@ class simple_html_dom_node
         {
             // Thanks to user gnarf from stackoverflow for this regular expression.
             $attributes = array();
-            preg_match_all("/([\w-]+)\s*:\s*([^;]+)\s*;?/", $this->attr['style'], $matches, PREG_SET_ORDER);
+            preg_match_all("/([\w\-]+)\s*:\s*([^;]+)\s*;?/", $this->attr['style'], $matches, PREG_SET_ORDER);
             foreach ($matches as $match) {
               $attributes[$match[1]] = $match[2];
             }
@@ -1361,7 +1402,7 @@ class simple_html_dom
             return true;
         }
 
-        if (!preg_match("/^[\w-:]+$/", $tag)) {
+        if (!preg_match("/^[\w\-:]+$/", $tag)) {
             $node->_[HDOM_INFO_TEXT] = '<' . $tag . $this->copy_until('<>');
             if ($this->char==='<') {
                 $this->link_nodes($node, false);
@@ -1709,7 +1750,7 @@ class simple_html_dom
     function childNodes($idx=-1) {return $this->root->childNodes($idx);}
     function firstChild() {return $this->root->first_child();}
     function lastChild() {return $this->root->last_child();}
-    function createElement($name, $value=null) {return @str_get_html("<$name>$value</$name>")->first_child();}
+    function createElement($name, $value=null) {return @str_get_html("<$name>$value</$name>")/*->first_child()*/;}
     function createTextNode($value) {return @end(str_get_html($value)->nodes);}
     function getElementById($id) {return $this->find("#$id", 0);}
     function getElementsById($id, $idx=null) {return $this->find("#$id", $idx);}
@@ -1718,4 +1759,3 @@ class simple_html_dom
     function loadFile() {$args = func_get_args();$this->load_file($args);}
 }
 
-?>
